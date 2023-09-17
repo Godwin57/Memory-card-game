@@ -75,10 +75,6 @@ function RenderEmoji({gameStage, setGameStage, score, setScore, setHighScore, hi
         if(difficulty === 'easy') {
             time = 12;
 
-            // Previously used this but eslint screamed at it, so although it works and looks pretty cool,
-            // I'm just gonna comment it out
-            // gameStage !== 1? time *= gameStage : time
-
             if(gameStage !== 1) {
                 time *= gameStage;
             }
@@ -130,7 +126,7 @@ function RenderEmoji({gameStage, setGameStage, score, setScore, setHighScore, hi
     // Grouping similar emojis. Would use this in amatuer and legend diff. level
     const getSimilarObj = (array:any) => {
         let storeSimilarArr = Object.create(null),
-        newArray = array.filter((obj:any) => obj.uniqueName)
+        newArray = array.filter((obj:any) => obj.uniqueName) //Removed arrays that are not similar
 
         function addArr (obj:any){
             if(storeSimilarArr[obj.uniqueName] == null){
@@ -155,8 +151,6 @@ function RenderEmoji({gameStage, setGameStage, score, setScore, setHighScore, hi
             .map((arr:any) => arr[1])
     }
 
-    // This is a function to randomly generate emoji for the different game level stages
-    // generateEmojiCards: (emojiArray: array, gameLevel: number)
     const generateEmojiCards = (emojiArray: any[], gameStage:number, difficulty:string) => {
         if(difficulty === 'easy') {
             return produceCertainNumberOfCards(cardNumber(gameStage), emojiArray, [500]);
@@ -171,7 +165,6 @@ function RenderEmoji({gameStage, setGameStage, score, setScore, setHighScore, hi
         }
     }
 
-    // Handle the incrementing of scores
     const incrementScore = () => {
         switch(difficulty){
             case 'easy':
@@ -183,7 +176,7 @@ function RenderEmoji({gameStage, setGameStage, score, setScore, setHighScore, hi
             case 'legend':
                 setScore(score + 5);
                 break;
-            // Adding this default value here is quite useless though.
+            // I think adding this default value here is quite useless though.
             default: 
                 console.error("DIFFICULTY IS UNRECOGNIZED")
         }
@@ -198,7 +191,6 @@ function RenderEmoji({gameStage, setGameStage, score, setScore, setHighScore, hi
         if (restartGame){
             setGameStage(1);
             setScore(0);
-            // Regenerate new emojis for the new game
             gameStage === 1 && regenerateGameEmoji();
         }
 
@@ -207,7 +199,6 @@ function RenderEmoji({gameStage, setGameStage, score, setScore, setHighScore, hi
         setTimer(gameStageTimer(difficulty, 1))
     }
 
-    // Handle what happens when an emoji is clicked
     const clickEmoji = (emojiObj:any, array:string[]) => {
         if (pause){
             alert("Game is currently paused, click the play button to continue")
@@ -216,23 +207,18 @@ function RenderEmoji({gameStage, setGameStage, score, setScore, setHighScore, hi
 
         if(emojiObj.clicked){
             alert("Game Over. You've previously clicked that animal");
-            // Resetting states
             resetStates(true);
             return;
         }
 
         setEmojiToDisplay(shuffleArray(array));
-
-        // Increment score
         incrementScore();
         
         emojiObj.clicked = true;
         emojiObj.displayed = true;
 
-        // Increase click count
         setClickCount(clickCount + 1);
 
-        // Logic to check if the gameStage has been finished
         if(clickCount === cardNumber(gameStage)){ 
             setFinishedLevel(true);
 
@@ -241,7 +227,6 @@ function RenderEmoji({gameStage, setGameStage, score, setScore, setHighScore, hi
                 return;
             }
 
-            // Tell the player that they've completed the game
             setCompletedGame(true);
             return;
         }
@@ -254,13 +239,8 @@ function RenderEmoji({gameStage, setGameStage, score, setScore, setHighScore, hi
 
     // Using useEffect to generate the required number of emojis for the game stage
     useEffect(() => {
-        // Generate game emojis
         regenerateGameEmoji();
 
-        // To be sure I don't have need for resetting.
-        // if(finishedLevel === false) return;
-
-        // Resetting state values that were previously changed
         resetStates(false);
 
         // Reset timer
@@ -277,6 +257,7 @@ function RenderEmoji({gameStage, setGameStage, score, setScore, setHighScore, hi
     }, [pause])
 
     // A little cheat for my game. It returns the emoji cards that have not been clicked
+    // This distorts the ui though
     // const emoji = emojiToDisplay
     //     .filter((aniEmo:any) => !aniEmo.clicked)
     //     .map((aniEmo:any) => <p key={aniEmo.codes}>{aniEmo.char}</p>);
@@ -290,27 +271,23 @@ function RenderEmoji({gameStage, setGameStage, score, setScore, setHighScore, hi
                     <p className="capitalize">Selected difficulty: {difficulty}</p>
             </div>
 
-            {/* Pause the game */}
             <button className='pauseGame' onClick={() => setPause(!pause)}>
                 {pause? 'Play' : 'Pause'}
             </button>
 
-            {/* Add timer to game */}
             {timer > 0 && <p className="timer">Remaining Time: {timer}</p>}
 
-            {/* Display the current playing game level */}
             <p className="gameStage">Current Game Stage: {gameStage}</p>
 
-            {/* Display emoji cards */}
+            {/* Emoji cards section*/}
             <div className="emojiSection">
                 {emojiToDisplay.map((aniEmo:any) =>
                         <div style={{display: 'inline-block'}} key={aniEmo.codes} 
                                 onClick={() => {clickEmoji(aniEmo, emojiToDisplay)}} className="emojiCard">
                             
-                            {/* Display the emoji */}
+                            {/* The emoji */}
                             <h1>{aniEmo.char}</h1>
 
-                            {/* Display the emojis name */}
                             <p style={{marginTop: '10px'}}><b>{aniEmo.name}</b></p>
 
                             {/* My little cheat for the game */}
@@ -319,7 +296,6 @@ function RenderEmoji({gameStage, setGameStage, score, setScore, setHighScore, hi
                 )}
             </div>
 
-            {/*  */}
             <p className="gameScore">{name !== ''? name + ' your' : 'Your'} game score is {score}</p>
         </>
     );

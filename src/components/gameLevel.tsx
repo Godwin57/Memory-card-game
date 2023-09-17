@@ -1,12 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-// type WelcomePageProps = {
-//     setDisplayGame: any;
-//     setName: any;
-// }
-
-// I'll come back to you when I learn what type I should put in you.
 function WelcomePage({setName}: any) {
     return (
         <>

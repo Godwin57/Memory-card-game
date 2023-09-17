@@ -27,7 +27,7 @@ function removeExcessItems(array:string[], requiredNo:number){
 
 const reduceArr = (array:any[]) => array.reduce((elem1, elem2) => elem1.concat(elem2), [])
 
-// This function unlike the amature function, only returns emojis that are purely similar looking
+// For legend level. Returns purely similar looking emojis
 export const legend = (arr:string[], maxCardNo:number) => shuffleArray(getSimElem(arr, maxCardNo));
 
 function getSimElem (arr:string[], maxCardNo:number){
@@ -44,7 +44,7 @@ function getSimElem (arr:string[], maxCardNo:number){
         cardArr.push(arr[emojiNumber])
         generatedEmojis.push(emojiNumber)
 
-        // Reduce array to a single element array
+        // Reduce two dimensional arr to a single array
         cardArr = reduceArr(cardArr)
     }
 
@@ -61,7 +61,6 @@ export const amateur = (simArr:any[], nonSimArr:string[], requiredNo:number) => 
         simEmojisIndexes.push(nonSimArr.indexOf(element));
     }
 
-    // Producing the rest of the array that was left to be produced with the non-similar emojis
     const remainingCards = produceCertainNumberOfCards(requiredNo - similarEmojisNo, animalEmoji(), simEmojisIndexes);
 
     return shuffleArray(similarArr.concat(remainingCards));
