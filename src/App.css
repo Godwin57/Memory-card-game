@@ -1,0 +1,158 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body{
+    min-height: 100vh;
+    background: linear-gradient(to right bottom, orange, rgb(255, 123, 0), orangered,
+        rgb(117, 3, 194));
+    background-repeat: no-repeat;
+}
+
+.App{
+    background: linear-gradient(to right bottom, rgb(117, 3, 194), orangered, 
+        rgb(255, 123, 0),  orange);
+    min-height: 80vh;
+    border-radius: 7px;
+    min-width: 450px;
+    max-width: 50%;
+    margin: 3% auto;
+    padding: 10px 50px;
+    box-shadow: 25px 25px 75px rgba(0, 0, 0, 0.25),
+    10px 10px 70px rgba(0, 0, 0, 0.473),
+    inset 2px 2px 10px rgba(0, 0, 0, 0.336),
+    inset 2px 2px 10px rgba(224, 130, 6, 0.63),
+    inset -5px -5px 10px rgba(100, 30, 4, 0.658);
+}
+
+.welcome{
+    height: auto;
+    margin-top: 20%;
+    font-size: 24px;
+}
+
+.welcome h2{
+    text-align: center;
+    font-size: 40px;
+    margin-bottom: 50px;
+}
+
+.inputs{
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.welcome input{
+    font-size: 18px;
+    padding: 10px 30px;
+    border-radius: 5px;
+    background: transparent;
+    outline-color: transparent;
+    border: 3px solid black;
+}
+
+button{
+    padding: 12px 50px;
+    background: transparent;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+    margin-top: 10px;
+}
+
+.welcome button:hover{
+    padding: 10px 40px;
+}
+
+.score{
+    display: flex;
+    justify-content: space-around;
+    font-size: 30px;
+    font-weight: 800;
+}
+
+.gameStage, .timer{
+    text-align: center;
+    font-size: 30px;
+    font-weight: 800;
+    margin-top: 3%;
+}
+
+.emojiSection{
+    width: 80%;
+    margin: 20px auto;
+    padding: 5px 10px;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.emojiCard{
+    width: 30%;
+    padding: 10px;
+    border: 1px solid black;
+    font-size: 1rem;
+    text-align: center;
+    cursor: pointer;
+    margin-top: 10px;
+    box-shadow: 5px 5px 20px rgb(41, 39, 39);
+}
+
+.finalMessage{
+    text-align: center;
+    margin-top: 10%;
+    font-size: 24px;
+    font-weight: 400;
+}
+
+.gameScore{
+    font-size: 20px;
+    text-align: center;
+    font-family: cursive;
+}
+
+.playAgain{
+    margin-left: 38%;
+    margin-top: 30px;
+}
+
+.difficulty{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 10%;
+    font-family: cursive;
+}
+
+.difficulty p{
+    font-size: 30px;
+    font-weight: 400;
+}
+
+.diffButtons{
+    margin-top: 30px;
+}
+
+.diffButtons button{
+    margin: 0 20px;
+    font-family: inherit;
+}
+
+.diffButtons button:hover{
+    font-size: 15px;
+}
+
+.timer{
+    font-size: 20px;
+    font-style: cursive;
+}
+
+.capitalize{
+    text-transform: capitalize;
+}
