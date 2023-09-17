@@ -3,9 +3,7 @@ import animalEmoji from "../emojis/animalEmoji";
 import shuffleArray from "./gameLogic";
 import {legend, amateur} from './gameLogic';
 
-export function generateRandomNumber (maxRange: number){
-    return Math.floor(Math.random() * maxRange);
-}
+export const generateRandomNumber = (maxRange: number) => Math.floor(Math.random() * maxRange)
 
 export function produceCertainNumberOfCards(cardNumberLimit:number, cardArray:any[], except:number[]){
     let cards = [],
